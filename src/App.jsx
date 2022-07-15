@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
-import Grid from './components/Grid'
 
 function App() {
+
+	useEffect(() => {
+		document.title = "Handwritten Classifier"
+	}, [])
 	const createGrid = (m, n) => {
 		let grid = []
 		for(let i = 0; i < m; i++) {
@@ -33,20 +36,21 @@ function App() {
 								{
 									grids.map((grid, x) => {
 										return (
-											<div key={x} onMouseDown={() => {
-												let tempGrid = gridInfo
-												const around = [[0,1], [1,0], [0, -1], [-1, 0]]
-												tempGrid[y][x] = 0
-												for(let i = 0; i < 2; i++) {
-													for(let j = 0; j < 4; j++) {
-														if((x + around[j][0] >= 0 && x + around[j][0] < 28) && (y + around[j][1] >= 0 && x + around[j][1] < 28)) {
-															tempGrid[y + around[j][0]][x + around[j][1]] -= 50
-														} 
+											<div key={x} 
+												onMouseDown={() => {
+													let tempGrid = gridInfo
+													const around = [[0,1], [1,0], [0, -1], [-1, 0]]
+													tempGrid[y][x] = 0
+													for(let i = 0; i < 2; i++) {
+														for(let j = 0; j < 4; j++) {
+															if((x + around[j][0] >= 0 && x + around[j][0] < 28) && (y + around[j][1] >= 0 && x + around[j][1] < 28)) {
+																tempGrid[y + around[j][0]][x + around[j][1]] -= 50
+															} 
+														}
 													}
-												}
-												setGrid(grid => [...tempGrid])
-											}}>
-												<Grid val={grid}></Grid>
+													setGrid(grid => [...tempGrid])
+												}} 
+												className='grid' style={{backgroundColor: `rgb(${grid}, ${grid}, ${grid})`}}>
 											</div>
 										)
 									})
