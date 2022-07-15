@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --bg-color: #0A192F;
+  --orange: #FF9315;
+  --red: #FF3D3D;
+  --green: #22ff52;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  background-color: var(--bg-color);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main-container {
+  margin: auto;
   display: flex;
-  flex-direction: column;
+  width: 80vw;
+  height: 100vh;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.detail {
+  width: 20vw;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.detail .title {
+  text-align: left;
+  padding: 20px 0;
+  border-bottom: 4px solid var(--orange);
+  margin-bottom: 20px;
+}
+.grid-parent {
+  border: 5px solid var(--orange);
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  margin: auto;
+}
+.grid {
+  width: 18px;
+  height: 18px;
+  border: 0.01px solid rgb(100, 100, 100);
+}
+.grid:hover {
+  background-color: black;
+}
+.button {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin: auto;
+}
+.button h3 {
+  color: white;
+}
+.button button {
+  font-size: 10px;
+  padding: 8px 16px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.clear {
+  background-color: var(--red);
+}
+.predict { 
+  background-color: var(--green);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button button:hover {
+  opacity: .8;
 }
