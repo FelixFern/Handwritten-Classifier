@@ -31,32 +31,31 @@ function App() {
 			</div>
 			<div className="grid-parent">
 				{gridInfo.map((grids, y) => {
-						return (
-							<div className='grid-col' key={y}>
-								{
-									grids.map((grid, x) => {
-										return (
-											<div key={x} 
-												onMouseDown={() => {
-													let tempGrid = gridInfo
-													const around = [[0,1], [1,0], [0, -1], [-1, 0]]
-													tempGrid[y][x] = 0
-													for(let i = 0; i < 2; i++) {
-														for(let j = 0; j < 4; j++) {
-															if((x + around[j][0] >= 0 && x + around[j][0] < 28) && (y + around[j][1] >= 0 && x + around[j][1] < 28)) {
-																tempGrid[y + around[j][0]][x + around[j][1]] -= 50
-															} 
-														}
-													}
-													setGrid(grid => [...tempGrid])
-												}} 
-												className='grid' style={{backgroundColor: `rgb(${grid}, ${grid}, ${grid})`}}>
-											</div>
-										)
-									})
-								}
-							</div>
-						)
+					return (
+						<div className='grid-col' key={y}>
+							{
+								grids.map((grid, x) => {
+									return (
+										<div key={x} 
+											draggable
+											onDragOver={() => {
+												let tempGrid = gridInfo
+												const around = [[0,1], [1,0], [0, -1], [-1, 0]]
+												tempGrid[y][x] = 0
+												for(let i = 0; i < 4; i++) {
+													if((y + around[i][0] >= 0 && y + around[i][0] < 28) && (x + around[i][1] >= 0 && x + around[i][1] < 28)) {
+														tempGrid[y + around[i][0]][x + around[i][1]] -= 50
+													} 
+												}
+												setGrid(grid => [...tempGrid])
+											}} 
+											className='grid' style={{backgroundColor: `rgb(${grid}, ${grid}, ${grid})`}}>
+										</div>
+									)
+								})
+							}
+						</div>
+					)
 					})
 				}
 			</div>

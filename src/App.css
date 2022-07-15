@@ -38,16 +38,23 @@ html {
   width: fit-content;
   height: fit-content;
   display: flex;
+  flex-direction: column;
   margin: auto;
 }
+.grid-col {
+  display: flex;
+}
 .grid {
+  cursor: pointer;
   width: 18px;
   height: 18px;
   border: 0.01px solid rgb(100, 100, 100);
 }
 .grid:hover {
   background-color: black;
+  opacity: .8;
 }
+
 .button {
   display: flex;
   align-items: center;
