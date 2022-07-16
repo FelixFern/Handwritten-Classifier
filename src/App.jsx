@@ -3,7 +3,6 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-
 	useEffect(() => {
 		document.title = "Handwritten Classifier"
 	}, [])
@@ -19,6 +18,7 @@ function App() {
 	}
 
 	const [ gridInfo, setGrid ] = useState(createGrid(28, 28)) 
+	const [ value, setValue] = useState()
 
 	const predict = () => {
 		axios.post('/predict', {
@@ -31,9 +31,22 @@ function App() {
 			console.log(err)
 		})
 	}
+	const addGrid = () => {
+		axios.post('/add', {
+			grid: gridInfo.toString(),
+			label: value,
+			prediction: true,
+		}).then((res) => {
+			console.log(res)
+		}).catch((err) => {
+			console.log(err)
+		})
+		clearGrid()
+	}
 	const clearGrid = () => {
 		setGrid(grid => [...createGrid(28, 28)])
 	}
+	
 	return (
 		<div className='main-container'>
 			<div className='detail'>
@@ -71,10 +84,20 @@ function App() {
 					})
 				}
 			</div>
-			<div className="button">
-				<h3>Action :</h3>
-				<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
-				<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
+			<div className="action">
+				<h3>Adding Data to Dataset</h3>
+				<div className='button'>
+					<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
+					<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
+				</div>
+				<h3>Adding Data to Dataset</h3>
+				<div className='add-data'>
+					<p>Label : </p>
+					<div className='input-field'>
+						<input type="number" max={9} min={0} value={value} onChange={(e) => {setValue(e.target.value)}}></input>
+						<button className='add' onClick={() => addGrid()}><h2>Add</h2></button>
+					</div>
+				</div>
 			</div>
 		</div>
 	)	

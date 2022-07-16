@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "marine-elevator-356502",
+  "private_key_id": "34f4099dc65cf4d6eb658b919ddcabf1e5fb414b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/fZq46UlUKWiL\nrEaBgAU6zA072Ag9uKccX2ECReGOspCpiPzAhJhxxSejfM/zEitdsgMHuTQs8vPn\nMTVgy+LXaeXcq6BtakmRADplaDBN9t4FfFDegQvUgzDv24nU3wx3znJmYpk8MHAm\nnYyAPj/8gCPV4cZFFSBeyZS5Lgr+1xt8vy61WY1dk3vMAB+gVXQEUnt5KDeMrLli\nI9IiBYa1gtxS54NeJu8hyZ3XbgQ5SAZ52RjVsJYiR6pVK89E8g/EUBzX753w3HxP\nvq9TtWb6zoCaBl6Gu+Y3aYVErvIklhJCeJDaEh29OvzSsh/0hIDJtGdtv3ylROn6\neyJgGt+JAgMBAAECggEAKaHcyDQMGcyw6qEHaTNUr75aaDblP8oMJwqDlFNuITCo\na/uY/CA35pBXOF+z9GRwYjwIFZ9J/TXLGmoj8UoSpQPkklAMHo27tddHWvHGgsTX\n63hmOqHy2P623ocsFchytP+A9sqcBy5+y554RA+EqNiRMfiWu0FHGuSXvZUJlfL9\nNYOm6kEB5TXT823+zwGs7s0OssWkh7okAjW1TylMbmpoLLemXkYVsQgO0GVCqIm3\noH0+KxnQztKB0n/6XjQ5633dZIFHcksHgX6s12TABEJ3OzAMbQknqUyMzkkpLsb5\nShUP1WToQs6ws14idHuyH5gakDEf6B+SByygBt8a6QKBgQDlI+TsKZ+S550f/zTf\nVJotzaYbVwTgH8SGOr8yUtCRA6thKjK2KBXZ6/cR+zRUWRvdtRJiRH1yOZyVXmfE\nwmcO7mg0zYFloDHqOn8ygK6YtLT5wqTgmhpWoWtQwIDRYRG6LNDS9e4h1Y8+p1rg\nvaLnTHEDEUHlhFlKis8U1asLpQKBgQDV7+k1qARAHTqxQ3BO0muDATIA7im228JW\n62OXQCTug1sDsgwzF+Rvm65GLUWyZQe/HsGd4jQRM/PYR+qb8qwPWU0Nd8qY4Fsy\naMpWht9lrg5TGBw1uSVRIAmBHukwntykB324CzR+Iivx4HCun9l+n6yxURikX+mU\nslgZcZ9PFQKBgQCJ66QD/j29d8nck4koj8zJmwnLVQJrQNPSk5O3358IWjQSpQqn\nF9OnOt+ZJCHoT0Z1mWK6YU08rq6wPYWqKfVMSHXSqoujNtw0hwc+x7PP2J1B5EXH\npxoJYNmuXmBrJsk7zXPYNw0hsmCpLqSFt79RB3LSjNWkJ5hzRL/GY6GzvQKBgQC4\nQD5u6rx2Z3YUEwvXptvXYSEqsfOVPCFc8K++JQ1pqhGp1h8xpeMkyETIxdbf9Kk+\nTgPcsWO8aS0a2Z1SICdVtMhqz//ZuGhyutOAv/oIvWYy5HHvRvy/qMLmxLN7H2bR\nkm4RIv1boJyOXYlOq/cKWgTGVhzN/JjUauD7UOMunQKBgFWPW2TGhMHF6FRUR50d\nOIAFqF57BuPrrAdpzYst99dwIAFlBZO9dTQX57SksxW4JA6BMYjiwLTlwD7DvbS4\nTcbx8WocNFd648QMQ09j8fczoXO3fw4cwSX8mkea1jD7UMjlZHnquLMggu+euo/5\nixIB/dGjMo/HjQE5Ufixn873\n-----END PRIVATE KEY-----\n",
+  "client_email": "handwritten-digit-classifier@marine-elevator-356502.iam.gserviceaccount.com",
+  "client_id": "106842128037072330199",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/handwritten-digit-classifier%40marine-elevator-356502.iam.gserviceaccount.com"
+}
