@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import './App.css'
 
 function App() {
@@ -19,6 +20,17 @@ function App() {
 
 	const [ gridInfo, setGrid ] = useState(createGrid(28, 28)) 
 
+	const predict = () => {
+		axios.post('/predict', {
+			grid: gridInfo,
+			label: '',
+			prediction: false,
+		}).then((res) => {
+			console.log(res)
+		}).catch((err) => {
+			console.log(err)
+		})
+	}
 	const clearGrid = () => {
 		setGrid(grid => [...createGrid(28, 28)])
 	}
@@ -61,7 +73,7 @@ function App() {
 			</div>
 			<div className="button">
 				<h3>Action :</h3>
-				<button className='predict'><h2>Predict</h2></button>
+				<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
 				<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
 			</div>
 		</div>
