@@ -8,14 +8,14 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 ## Stack Used : 
 1. React - Frontend 
 2. Python / Flask - Backend 
-3. Google Sheets - Database (?) 
+3. Google Sheets - Database 
 
 ## Project Progress : 
-1. Grid for Handwritting Number (work in progress)
+1. Grid for Handwritting Number (done)
 2. Backend Setup (work in progress)
-3. Neural Network Model
-4. Sending and Receiving Data Between Frontend and Backend
-5. Connecting to Database and Accept User Data
+3. Neural Network Model (work in progress)
+4. Sending and Receiving Data Between Frontend and Backend (done)
+5. Connecting to Database and Accept User Data (done)
 
 ## How to Run Project:
 (work in progress)
