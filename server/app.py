@@ -3,6 +3,8 @@ from flask import Flask, jsonify, request
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+from model import predict_digit
+
 # Google Sheets Connect
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
@@ -17,7 +19,9 @@ def predict():
     if request.method == "GET":
         return "Getting Data"
     if request.method == "POST":
-        return jsonify(request.json["grid"])
+        req = request.get_json()
+        result = predict_digit(req["grid"])
+        return jsonify(result)
 
 @app.route('/add', methods=["POST"])
 def addGrid():
