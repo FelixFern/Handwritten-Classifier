@@ -6,6 +6,7 @@
   --red: #FF3D3D;
   --green: #22ff52;
   --blue: #24a0ed;
+  --blue2: #2453ed;
 }
 
 * {
@@ -25,7 +26,7 @@ html {
   align-items: center;
 }
 .detail {
-  width: 20vw;
+  width: 15vw;
   color: white;
 }
 .detail .title {
@@ -33,6 +34,9 @@ html {
   padding: 20px 0;
   border-bottom: 4px solid var(--orange);
   margin-bottom: 20px;
+}
+.detail h3{ 
+  margin-top: 10px;
 }
 .grid-parent {
   border: 5px solid var(--orange);
@@ -60,6 +64,13 @@ html {
   padding: 10px 0;
   margin: 20px 0;
   color: white;
+}
+.action h4 {
+  color: white;
+  margin-top: 20px;
+}
+.action h4 span {
+  color: var(--orange);
 }
 .button {
   display: flex;

@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
+import Popup from './components/Popup'
+
+export const popupContext = createContext()
 
 function App() {
 	useEffect(() => {
@@ -18,7 +21,9 @@ function App() {
 	}
 
 	const [ gridInfo, setGrid ] = useState(createGrid(28, 28)) 
-	const [ value, setValue] = useState()
+	const [ value, setValue ] = useState()
+	const [ prediction, setPrediction ] = useState(-1)
+	const [ popup, setPopup ] = useState(false)
 
 	const predict = () => {
 		axios.post('/predict', {
@@ -37,8 +42,16 @@ function App() {
 			label: value,
 			prediction: true,
 		}).then((res) => {
+			setPopup({"state": true, "type": "success"})
+			setInterval(() => {
+				setPopup({"state": false, "type": "success"})
+			}, 3000);
 			console.log(res)
 		}).catch((err) => {
+			setPopup({"state": true, "type": "failed"})
+			setInterval(() => {
+				setPopup({"state": false, "type": "failed"})
+			}, 3000);
 			console.log(err)
 		})
 		clearGrid()
@@ -46,13 +59,34 @@ function App() {
 	const clearGrid = () => {
 		setGrid(grid => [...createGrid(28, 28)])
 	}
-	
+	const setColor = (x, y) => {
+		let tempGrid = gridInfo
+		const around = [[0,1], [1,0], [0, -1], [-1, 0]]
+		tempGrid[y][x] = 0
+		for(let i = 0; i < 4; i++) {
+			if((y + around[i][0] >= 0 && y + around[i][0] < 28) && (x + around[i][1] >= 0 && x + around[i][1] < 28)) {
+				if(tempGrid[y + around[i][0]][x + around[i][1]] - 50 >= 0) {tempGrid[y + around[i][0]][x + around[i][1]] -= 50}
+			} 
+		}
+		setGrid(grid => [...tempGrid])
+	}
+	const getData = () => {
+
+	}
 	return (
+		<popupContext.Provider value={{ popup, setPopup }}>
+		<Popup></Popup>
 		<div className='main-container'>
 			<div className='detail'>
-				<h1 className='title'>Handwritten Number Classifier</h1>
-				<p>Incididunt reprehenderit officia aliquip est. Cillum voluptate consectetur tempor aliqua laborum eiusmod occaecat sunt dolor ea proident in. Velit incididunt cillum dolor labore labore. Sint consectetur commodo nulla deserunt ex et fugiat cupidatat aute sunt quis aliqua ad anim. In nostrud aliqua mollit quis id dolor. Consequat elit eiusmod elit proident culpa et enim excepteur fugiat id dolore nisi adipisicing elit. 
-					Occaecat adipisicing proident sunt velit eiusmod id et cupidatat do et quis magna consectetur. Commodo in culpa esse elit adipisicing nostrud amet magna. Consectetur do elit aliqua esse aliqua laborum exercitation.</p>
+				<h1 className='title'>Handwritten Digits Classifier</h1>
+				<p>a Handwritten Digits Classifier Neural Network Project, built with React and Flask</p>
+				<h3>How to Use:</h3>
+				<ol>
+					<li>1. Draw a digit on the canvas (digit between 0 - 9)</li>
+					<li>2. Click predict button on the right side of the page</li>
+					<li>3. Then, the number predicted will be shown under the button</li>
+					<li>4. Incase of inaccuracy you can add the data with the right label to the dataset, by filling the label input with the right label, then click add</li>
+				</ol>
 			</div>
 			<div className="grid-parent">
 				{gridInfo.map((grids, y) => {
@@ -63,16 +97,11 @@ function App() {
 									return (
 										<div key={x} 
 											draggable
+											onClick={() => {
+												setColor(x,y)
+											}}
 											onDragOver={() => {
-												let tempGrid = gridInfo
-												const around = [[0,1], [1,0], [0, -1], [-1, 0]]
-												tempGrid[y][x] = 0
-												for(let i = 0; i < 4; i++) {
-													if((y + around[i][0] >= 0 && y + around[i][0] < 28) && (x + around[i][1] >= 0 && x + around[i][1] < 28)) {
-														tempGrid[y + around[i][0]][x + around[i][1]] -= 50
-													} 
-												}
-												setGrid(grid => [...tempGrid])
+												setColor(x,y)
 											}} 
 											className='grid' style={{backgroundColor: `rgb(${grid}, ${grid}, ${grid})`}}>
 										</div>
@@ -85,11 +114,12 @@ function App() {
 				}
 			</div>
 			<div className="action">
-				<h3>Adding Data to Dataset</h3>
+				<h3>Action Button</h3>
 				<div className='button'>
 					<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
 					<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
 				</div>
+				<h4>Your Prediction is : <span>{prediction}</span> </h4>
 				<h3>Adding Data to Dataset</h3>
 				<div className='add-data'>
 					<p>Label : </p>
@@ -100,6 +130,7 @@ function App() {
 				</div>
 			</div>
 		</div>
+		</popupContext.Provider>
 	)	
 }
 

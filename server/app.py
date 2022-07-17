@@ -3,14 +3,12 @@ from flask import Flask, jsonify, request
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-
 # Google Sheets Connect
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(creds)
 sheet = client.open("Handwritten-Dataset").sheet1
 
-print(sheet.get_all_records())
 # Flask App
 app = Flask(__name__)
 
