@@ -17,6 +17,10 @@
     background-color: var(--red) !important;
     border: 2px solid var(--red);
 }
+.pred {
+    background-color: var(--green) !important;
+    border: 2px solid var(--green);
+}
 .close-btn:hover {
     opacity: .8;
     cursor: pointer;

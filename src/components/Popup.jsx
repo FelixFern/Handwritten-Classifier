@@ -19,7 +19,14 @@ function Popup() {
                 <h2 className='close-btn' onClick={() => { setPopup(false); console.log(popup) }}>x</h2>
             </div>
         )
-    }
+    } else if (popup.type == "predicted") {
+        return (
+            <div className={ popup.state ? "pred popup-parent show" : "pred popup-parent hide"  }>
+                <h2>Digit Predicted</h2>
+                <h2 className='close-btn' onClick={() => { setPopup(false); console.log(popup) }}>x</h2>
+            </div>
+        )
+    } 
 }
 
 export default Popup

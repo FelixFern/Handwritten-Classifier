@@ -21,7 +21,8 @@ def predict():
     if request.method == "POST":
         req = request.get_json()
         result = predict_digit(req["grid"])
-        return jsonify(result)
+        predicted = {'result': int(result)}
+        return jsonify(predicted)
 
 @app.route('/add', methods=["POST"])
 def addGrid():

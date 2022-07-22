@@ -83,6 +83,13 @@ html {
   color: white;
   column-gap: 10px;
 }
+.add-data a {
+  color: white;
+  padding-top: 20px;
+}
+.add-data a:hover {
+  color: var(--orange);
+}
 button {
   font-size: 10px;
   padding: 8px 16px;
@@ -98,10 +105,13 @@ button:hover {
   display: flex;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 10px;
   column-gap: 10px;
+
 }
 .input-field input {
   height: 30px;
+  width: 100px;
 }
 .add {
   margin: 0;
@@ -112,4 +122,26 @@ button:hover {
 }
 .predict { 
   background-color: var(--green);
+}
+
+.loading h3 {
+  border-bottom: none;
+}
+.loading-bar {
+  margin-top: -20px;
+  width: 98%;
+  height: 20px;
+  border: 2px solid white;
+  background-color: var(--orange);
+}
+.show-l {
+  animation: 1s loading infinite;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }

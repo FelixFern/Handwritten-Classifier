@@ -14,7 +14,7 @@ function App() {
 		for(let i = 0; i < m; i++) {
 			grid.push([])
 			for(let j = 0; j < n; j++) {
-				grid[i].push(255)
+				grid[i].push(0)
 			}
 		}
 		return grid
@@ -24,14 +24,21 @@ function App() {
 	const [ value, setValue ] = useState()
 	const [ prediction, setPrediction ] = useState(-1)
 	const [ popup, setPopup ] = useState(false)
+	const [ loading, setLoading ] = useState(false)
 
 	const predict = () => {
+		setLoading(true)
 		axios.post('/predict', {
 			grid: gridInfo,
 			label: '',
 			prediction: false,
 		}).then((res) => {
-			console.log(res)
+			setLoading(false)
+			setPrediction(res.data.result)
+			setPopup({"state": true, "type": "predicted"})
+			setTimeout(() => {
+				setPopup({"state": false, "type": "predicted"})
+			}, 5000);
 		}).catch((err) => {
 			console.log(err)
 		})
@@ -43,15 +50,15 @@ function App() {
 			prediction: true,
 		}).then((res) => {
 			setPopup({"state": true, "type": "success"})
-			setInterval(() => {
+			setTimeout(() => {
 				setPopup({"state": false, "type": "success"})
-			}, 3000);
+			}, 5000);
 			console.log(res)
 		}).catch((err) => {
 			setPopup({"state": true, "type": "failed"})
-			setInterval(() => {
+			setTimeout(() => {
 				setPopup({"state": false, "type": "failed"})
-			}, 3000);
+			}, 5000);
 			console.log(err)
 		})
 		clearGrid()
@@ -62,10 +69,10 @@ function App() {
 	const setColor = (x, y) => {
 		let tempGrid = gridInfo
 		const around = [[0,1], [1,0], [0, -1], [-1, 0]]
-		tempGrid[y][x] = 0
+		tempGrid[y][x] = 255
 		for(let i = 0; i < 4; i++) {
 			if((y + around[i][0] >= 0 && y + around[i][0] < 28) && (x + around[i][1] >= 0 && x + around[i][1] < 28)) {
-				if(tempGrid[y + around[i][0]][x + around[i][1]] - 50 >= 0) {tempGrid[y + around[i][0]][x + around[i][1]] -= 50}
+				if(tempGrid[y + around[i][0]][x + around[i][1]] + 50 <= 255) {tempGrid[y + around[i][0]][x + around[i][1]] += 50}
 			} 
 		}
 		setGrid(grid => [...tempGrid])
@@ -87,6 +94,7 @@ function App() {
 					<li>3. Then, the number predicted will be shown under the button</li>
 					<li>4. Incase of inaccuracy you can add the data with the right label to the dataset, by filling the label input with the right label, then click add</li>
 				</ol>
+				<p>note : please don't spam the predict button</p>
 			</div>
 			<div className="grid-parent">
 				{gridInfo.map((grids, y) => {
@@ -114,6 +122,10 @@ function App() {
 				}
 			</div>
 			<div className="action">
+				<div className="loading">
+					<h3>{!loading ? "Handwritten Classifier" : "Working..."}</h3>
+					<div className={loading ? "show-l loading-bar": "hide-l loading-bar"}></div>
+				</div>
 				<h3>Action Button</h3>
 				<div className='button'>
 					<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
@@ -127,6 +139,7 @@ function App() {
 						<input type="number" max={9} min={0} value={value} onChange={(e) => {setValue(e.target.value)}}></input>
 						<button className='add' onClick={() => addGrid()}><h2>Add</h2></button>
 					</div>
+					<a href="https://docs.google.com/spreadsheets/d/1hhD5zAzPiJ-vHnAZDEcYkluxA1S0AmLQCQDoIMMBhk0/edit?usp=sharing">Dataset</a>
 				</div>
 			</div>
 		</div>

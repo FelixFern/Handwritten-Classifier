@@ -10,22 +10,40 @@ def predict_digit(data):
     client = gspread.authorize(creds)
     sheet = client.open("Handwritten-Dataset").sheet1
 
+    # adding training data
+    training_data = pd.read_csv('mnist_test.csv')
+    training_data = np.array(training_data)
+    m, n = training_data.shape
+
+    data_train = training_data.T
+    mnist_y_train = data_train[0]
+    mnist_x_train = data_train[1:n]
+    mnist_x_train = mnist_x_train / 255
+    _,m_train = mnist_x_train.shape
+
     df = pd.DataFrame(sheet.get_all_values())
     df.columns = df.iloc[0]
     df = df[1:]
 
     x_data = []
     y_data = df["label"]
+    for i in df.index: 
+        df.at[i, "grid"] = df.at[i, "grid"].split(',')
 
     for i in df.index:
         x_data.append(df.at[i,"grid"])
 
-    x_data = np.asarray(x_data).T
+    x_data = np.asarray(x_data)
+    y_data = np.asarray(y_data)
 
-    x_data = x_data.astype('int32')
+    x_data = x_data.astype('int32').T
+    x_data = x_data / 255
     y_data = y_data.astype('int32')
 
     m, n = x_data.shape
+    
+    x_train = np.concatenate((mnist_x_train.T, x_data.T)).T
+    Y_train = np.concatenate((mnist_y_train.T, y_data.T)).T
     
     # Function 
     def init_params():
@@ -90,11 +108,11 @@ def predict_digit(data):
             W1, b1, W2, b2 = update_params(W1, b1, W2, b2, dW1, db1, dW2, db2, alpha)
             if i % 10 == 0:
                 # print("Iteration: ", i)
-                # predictions = get_predictions(A2)
-                print(get_accuracy(predictions, Y))
+                predictions = get_predictions(A2)
+                # print(get_accuracy(predictions, Y))
         return W1, b1, W2, b2
 
-    W1, b1, W2, b2 = gradient_descent(x_data, y_data, 0.10, 500)
+    W1, b1, W2, b2 = gradient_descent(x_train, Y_train, 0.20, 250)
 
     # Prediction
     def make_predictions(X, W1, b1, W2, b2):
@@ -102,9 +120,8 @@ def predict_digit(data):
         predictions = get_predictions(A2)
         return predictions
 
-    def test_prediction(data, W1, b1, W2, b2):
-        prediction = make_predictions(data, W1, b1, W2, b2)
-        label = Y_train[index]
+    data_grid = np.array(data, dtype='int32').reshape(-1,1)
+    result = make_predictions(data_grid, W1, b1, W2, b2)
     
-    # test_prediction(data, W1, b1, W2, b2)
-    return data
+    print(result[0])
+    return result[0]
