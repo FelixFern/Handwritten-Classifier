@@ -18,6 +18,7 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 5. Connecting to Database and Accept User Data ✅
 6. Add leaderboard for user that add data to the dataset
 7. Add data plot by each label 
+8. Add more data to dataset
 
 ## How to Run Project:
 (work in progress)
