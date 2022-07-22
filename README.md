@@ -12,10 +12,12 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 
 ## Project Progress : 
 1. Grid for Handwritting Number ✅
-2. Backend Setup (work in progress)
-3. Neural Network Model (work in progress)
+2. Backend Setup ✅
+3. Neural Network Model ✅
 4. Sending and Receiving Data Between Frontend and Backend ✅
 5. Connecting to Database and Accept User Data ✅
+6. Add leaderboard for user that add data to the dataset
+7. Add data plot by each label 
 
 ## How to Run Project:
 (work in progress)
