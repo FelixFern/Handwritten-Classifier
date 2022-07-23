@@ -22,18 +22,18 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 
 ## How to Run Project:
 Install all dependencies and needed package
-#### React : 
+#### Frontend : 
 ```
     npm install
 ```
-#### Flask : 
+#### Backend : 
 Navigate to the server directory using 
 ```
     cd server
 ```
-Install flask, numpy, pandas, gspread, oauth2client
+Install module needed: flask, numpy, pandas, gspread, oauth2client
 ```
-    pip install flask numpy pandas gspread oauth2client 
+    pip install -r requirements.txt
 ```
 
 #### Running Project :
