@@ -33,6 +33,7 @@ function App() {
 
 	const predict = () => {
 		setLoading(true)
+		setPrediction(-1)
 		axios.post('/predict', {
 			grid: gridInfo,
 			label: '',
@@ -149,7 +150,7 @@ function App() {
 					<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
 					<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
 				</div>
-				<h4>Your Prediction is : <span>{prediction}</span> </h4>
+				<h4>Predicted Number : <span>{prediction}</span> </h4>
 				<h3>Adding Data to Dataset</h3>
 				<div className='add-data'>
 					<p>Label : </p>
