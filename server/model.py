@@ -4,22 +4,42 @@ import pandas as pd
 import numpy as np
 
 # Google Sheets Connect
-def predict_digit(data):
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
-    client = gspread.authorize(creds)
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+client = gspread.authorize(creds)
+
+# adding training data
+# training_data = pd.read_csv('mnist_test.csv')
+# training_data = np.array(training_data)
+# m, n = training_data.shape
+
+# data_train = training_data.T
+# mnist_y_train = data_train[0]
+# mnist_x_train = data_train[1:n]
+# mnist_x_train = mnist_x_train / 255
+# _,m_train = mnist_x_train.shape
+
+
+
+def get_data():
+    # Load Data
     sheet = client.open("Handwritten-Dataset").sheet1
+    df = pd.DataFrame(sheet.get_all_values())
+    df.columns = df.iloc[0]
+    df = df[1:]
+    y_data = df["label"]
+    y_data = np.asarray(y_data)
+    y_data = y_data.astype('int32')
 
-    # adding training data
-    training_data = pd.read_csv('mnist_test.csv')
-    training_data = np.array(training_data)
-    m, n = training_data.shape
+    y_train = y_data    
+    data = [0 for i in range(10)]
+    for i in y_train:
+        data[i] += 1 
+    return data
 
-    data_train = training_data.T
-    mnist_y_train = data_train[0]
-    mnist_x_train = data_train[1:n]
-    mnist_x_train = mnist_x_train / 255
-    _,m_train = mnist_x_train.shape
+def predict_digit(data):
+    # Load Data
+    sheet = client.open("Handwritten-Dataset").sheet1
 
     df = pd.DataFrame(sheet.get_all_values())
     df.columns = df.iloc[0]
@@ -41,10 +61,11 @@ def predict_digit(data):
     y_data = y_data.astype('int32')
 
     m, n = x_data.shape
-    
-    x_train = np.concatenate((mnist_x_train.T, x_data.T)).T
-    Y_train = np.concatenate((mnist_y_train.T, y_data.T)).T
-    
+
+    # x_train = np.concatenate((mnist_x_train.T, x_data.T)).T
+    # Y_train = np.concatenate((mnist_y_train.T, y_data.T)).T
+    x_train = x_data
+    y_train = y_data    
     # Function 
     def init_params():
         W1 = np.random.rand(10, 784) - 0.5
@@ -112,7 +133,7 @@ def predict_digit(data):
                 # print(get_accuracy(predictions, Y))
         return W1, b1, W2, b2
 
-    W1, b1, W2, b2 = gradient_descent(x_train, Y_train, 0.20, 250)
+    W1, b1, W2, b2 = gradient_descent(x_train, y_train, 0.10, 500)
 
     # Prediction
     def make_predictions(X, W1, b1, W2, b2):

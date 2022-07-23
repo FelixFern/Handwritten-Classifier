@@ -2,6 +2,7 @@
 
 :root {
   --bg-color: #0A192F;
+  --bg-color-2: #1c2636;
   --orange: #FF9315;
   --red: #FF3D3D;
   --green: #22ff52;
@@ -85,6 +86,7 @@ html {
 }
 .add-data a {
   color: white;
+  margin-right: 20px;
   padding-top: 20px;
 }
 .add-data a:hover {
@@ -128,6 +130,7 @@ button:hover {
   border-bottom: none;
 }
 .loading-bar {
+  transition: 0.5s;
   margin-top: -20px;
   width: 98%;
   height: 20px;

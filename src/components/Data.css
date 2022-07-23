@@ -1,0 +1,42 @@
+.data-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85vw;
+    height: 85vh;
+    background-color: var(--bg-color-2);
+    border-radius: 10px;
+    opacity: .9;
+
+}
+.close {
+    width: 95%;
+    text-align: right;
+    margin: auto;
+    margin-top: 2%;
+    color: white;
+    cursor: pointer;
+}
+.close-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+.show-d {
+    transition: 0.5s ease;
+    transform: translate(-50%, -50%) scale(1);
+}
+.hide-d {
+    transition: 0.5s ease;
+    transform: translate(-50%, -200%) scale(0);
+}
+.chart-container {
+    width: 75%;
+    height: fit-content;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+.chart-container h1 {
+    margin-bottom: 10px;
+}

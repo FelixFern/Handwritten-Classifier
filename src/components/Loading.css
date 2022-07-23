@@ -1,0 +1,16 @@
+.loading-parent {
+    position: absolute;
+    background-color: var(--black);
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+}
+.loading-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loading-parent img {
+    width: 50px;
+}

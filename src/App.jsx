@@ -2,8 +2,11 @@ import React, { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
 import Popup from './components/Popup'
+import Data from './components/Data'
+import Loading from './components/Loading'
 
 export const popupContext = createContext()
+export const dataModalContext = createContext()
 
 function App() {
 	useEffect(() => {
@@ -24,6 +27,8 @@ function App() {
 	const [ value, setValue ] = useState()
 	const [ prediction, setPrediction ] = useState(-1)
 	const [ popup, setPopup ] = useState(false)
+	const [ dataModal, setDataModal ] = useState(false)
+	const [ dataDist, setDataDist ] = useState()
 	const [ loading, setLoading ] = useState(false)
 
 	const predict = () => {
@@ -78,11 +83,24 @@ function App() {
 		setGrid(grid => [...tempGrid])
 	}
 	const getData = () => {
-
+		axios.get('/data').then((res) => {
+			console.log(res.data.data)
+			setDataDist(res.data.data)
+		}).catch((err) => {
+			console.log(err)
+		})
 	}
+
+	useEffect(() => {
+		getData()
+	},[])
+	
+	if (typeof dataDist === 'undefined') return <Loading></Loading>
 	return (
 		<popupContext.Provider value={{ popup, setPopup }}>
+		<dataModalContext.Provider value={{ dataModal, setDataModal }}>
 		<Popup></Popup>
+		<Data data={dataDist}></Data>
 		<div className='main-container'>
 			<div className='detail'>
 				<h1 className='title'>Handwritten Digits Classifier</h1>
@@ -139,10 +157,19 @@ function App() {
 						<input type="number" max={9} min={0} value={value} onChange={(e) => {setValue(e.target.value)}}></input>
 						<button className='add' onClick={() => addGrid()}><h2>Add</h2></button>
 					</div>
-					<a href="https://docs.google.com/spreadsheets/d/1hhD5zAzPiJ-vHnAZDEcYkluxA1S0AmLQCQDoIMMBhk0/edit?usp=sharing">Dataset</a>
+					<a href="https://docs.google.com/spreadsheets/d/1hhD5zAzPiJ-vHnAZDEcYkluxA1S0AmLQCQDoIMMBhk0/edit?usp=sharing" target="_blank">Dataset</a>
+					<a onClick={() => {
+						setDataModal(true)
+						getData()
+						}
+					} 
+						href='#'>
+							Data Distribution
+					</a>
 				</div>
 			</div>
 		</div>
+		</dataModalContext.Provider>
 		</popupContext.Provider>
 	)	
 }

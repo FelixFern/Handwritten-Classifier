@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-from model import predict_digit
+from model import predict_digit, get_data
 
 # Google Sheets Connect
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
@@ -14,10 +14,8 @@ sheet = client.open("Handwritten-Dataset").sheet1
 # Flask App
 app = Flask(__name__)
 
-@app.route('/predict', methods=["GET","POST"])
+@app.route('/predict', methods=["POST"])
 def predict():
-    if request.method == "GET":
-        return "Getting Data"
     if request.method == "POST":
         req = request.get_json()
         result = predict_digit(req["grid"])
@@ -33,6 +31,13 @@ def addGrid():
         row = [req["grid"], req["label"], req["prediction"]]
         sheet.insert_row(row, 2)
         return jsonify(req)
+
+@app.route('/data', methods=["GET"])
+def getData():
+    if request.method == "GET":
+        data = {'data' : get_data()}
+        return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=3001)
