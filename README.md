@@ -17,10 +17,37 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 4. Sending and Receiving Data Between Frontend and Backend ✅
 5. Connecting to Database and Accept User Data ✅
 6. Add leaderboard for user that add data to the dataset
-7. Add data plot by each label 
-8. Add more data to dataset
+7. Add data plot by each label ✅
+8. Add more data to dataset 
 
 ## How to Run Project:
-(work in progress)
+Install all dependencies and needed package
+#### React : 
+```
+    npm install
+```
+#### Flask : 
+Navigate to the server directory using 
+```
+    cd server
+```
+Install flask, numpy, pandas, gspread, oauth2client
+```
+    pip install flask numpy pandas gspread oauth2client 
+```
+
+#### Running Project :
+After installing all dependecies and needed package, proceed to run the app, 
+Run the react frontend  
+```
+    npm run
+```
+Run the flask backend
+```
+    flask run
+```
+the frontend will run on [http://localhost:3000](http://localhost:3000) and the backend will run on [http://localhost:3001](http://localhost:3001) 
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
 
 Project by : Felix Fernando
