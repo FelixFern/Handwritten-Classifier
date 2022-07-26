@@ -19,8 +19,6 @@ client = gspread.authorize(creds)
 # mnist_x_train = mnist_x_train / 255
 # _,m_train = mnist_x_train.shape
 
-
-
 def get_data():
     # Load Data
     sheet = client.open("Handwritten-Dataset").sheet1
