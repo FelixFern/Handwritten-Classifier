@@ -14,6 +14,13 @@ sheet = client.open("Handwritten-Dataset").sheet1
 # Flask App
 app = Flask(__name__)
 
+@app.route('/train', methods=["GET"])
+def train():
+    if request.method == "GET":
+        train = {'accuracy': 100}
+        return jsonify(train)
+
+
 @app.route('/predict', methods=["POST"])
 def predict():
     if request.method == "POST":

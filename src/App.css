@@ -125,7 +125,16 @@ button:hover {
 .predict { 
   background-color: var(--green);
 }
-
+.train { 
+  background-color: var(--blue);
+}
+.disabled { 
+  opacity: .5;
+  cursor: default;
+}
+.disabled:hover {
+  opacity: .5;
+}
 .loading h3 {
   border-bottom: none;
 }

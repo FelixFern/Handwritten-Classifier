@@ -26,10 +26,22 @@ function App() {
 	const [ gridInfo, setGrid ] = useState(createGrid(28, 28)) 
 	const [ value, setValue ] = useState()
 	const [ prediction, setPrediction ] = useState(-1)
+	const [ accuracy, setAccuracy ] = useState(0)
 	const [ popup, setPopup ] = useState(false)
 	const [ dataModal, setDataModal ] = useState(false)
 	const [ dataDist, setDataDist ] = useState()
 	const [ loading, setLoading ] = useState(false)
+	const [ trained, setTrained ] = useState(false)
+
+	const train = () => {
+		axios.get('/train')
+		.then((res) => {
+			setTrained(true)
+			setAccuracy(res.data.accuracy)
+		}).catch((err) => {
+			console.log(err)
+		})
+	}
 
 	const predict = () => {
 		setLoading(true)
@@ -147,9 +159,11 @@ function App() {
 				</div>
 				<h3>Action Button</h3>
 				<div className='button'>
-					<button className='predict' onClick={() => predict()}><h2>Predict</h2></button>
+					<button className='train' onClick={() => train()}><h2>Train</h2></button>
+					<button className={trained ? 'predict' : 'predict disabled'} disabled={trained ? false : true} onClick={() => predict()}><h2>Predict</h2></button>
 					<button className='clear' onClick={() => clearGrid()}><h2>Clear</h2></button>
 				</div>
+				<h4>Model Accuracy : <span>{accuracy}%</span> </h4>
 				<h4>Predicted Number : <span>{prediction}</span> </h4>
 				<h3>Adding Data to Dataset</h3>
 				<div className='add-data'>
