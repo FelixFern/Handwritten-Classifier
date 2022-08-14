@@ -16,9 +16,9 @@ How this web app will work is firstly, user draw in available 28 x 28 grid, then
 3. Neural Network Model ✅
 4. Sending and Receiving Data Between Frontend and Backend ✅
 5. Connecting to Database and Accept User Data ✅
-6. Add leaderboard for user that add data to the dataset
-7. Add data plot by each label ✅
-8. Add more data to dataset 
+6. Add data plot by each label ✅
+7. Add leaderboard for user that add data to the dataset
+8. Add dedicated training button instead of re-training model everytime 
 
 ## How to Run Project:
 Install all dependencies and needed package
