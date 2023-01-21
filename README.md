@@ -48,3 +48,6 @@ Run the flask backend
 ```
 the frontend will run on [http://localhost:3000](http://localhost:3000) and the backend will run on [http://localhost:3001](http://localhost:3001) 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## Reference : 
+https://www.youtube.com/watch?v=w8yWXqWQYmU&t=932s&ab_channel=SamsonZhang
